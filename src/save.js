@@ -17,14 +17,14 @@ import { useBlockProps } from '@wordpress/block-editor';
  */
 export default function save({attributes}) {
 	// define show starting year and starting year
-	const {showStartingYear, startingYear} = attributes;
-	// define current yeat
-	const currYear = new Date().getFullYear().toString();
+	const {fallbackCurrYear, showStartingYear, startingYear} = attributes;
+	// if fallback year is not set
+	if(!fallbackCurrYear) return null;
 	// set the display date
-	let displayDate = currYear;
+	let displayDate = fallbackCurrYear;
 	// if we're showing the year add it it to the display date
 	if(showStartingYear && startingYear){
-		displayDate = startingYear + ' - ' + currYear;
+		displayDate = startingYear + ' - ' + fallbackCurrYear;
 	}
 
 	return (

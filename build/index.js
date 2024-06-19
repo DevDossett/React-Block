@@ -50,11 +50,14 @@ __webpack_require__.r(__webpack_exports__);
 
 /* == Block Ui == */
 
+/* == React == */
+
 function Edit({
   attributes,
   setAttributes
 }) {
   const {
+    fallbackCurrYear,
     showStartingYear,
     startingYear
   } = attributes;
@@ -65,6 +68,14 @@ function Edit({
   if (showStartingYear && startingYear)
     // set display date to starting year - current year
     displayDate = startingYear + " - " + currYear;
+  // if the fallback year is not set, set it to the current yeat
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
+    if (currYear != fallbackCurrYear) {
+      setAttributes({
+        fallbackCurrYear: currYear
+      });
+    }
+  }, [currYear, fallbackCurrYear, setAttributes]);
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.InspectorControls, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelBody, {
     title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Setting")
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.ToggleControl, {
@@ -127,16 +138,17 @@ function save({
 }) {
   // define show starting year and starting year
   const {
+    fallbackCurrYear,
     showStartingYear,
     startingYear
   } = attributes;
-  // define current yeat
-  const currYear = new Date().getFullYear().toString();
+  // if fallback year is not set
+  if (!fallbackCurrYear) return null;
   // set the display date
-  let displayDate = currYear;
+  let displayDate = fallbackCurrYear;
   // if we're showing the year add it it to the display date
   if (showStartingYear && startingYear) {
-    displayDate = startingYear + ' - ' + currYear;
+    displayDate = startingYear + ' - ' + fallbackCurrYear;
   }
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
     ..._wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.useBlockProps.save()
@@ -201,7 +213,7 @@ module.exports = window["wp"]["i18n"];
   \************************/
 /***/ ((module) => {
 
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"create-block/copyright-date-block","version":"0.1.0","title":"Copyright Date Block","category":"widgets","description":"Display Site\'s copyright date","example":{},"attributes":{"showStartingYear":{"type":"boolean"},"startingYear":{"type":"string"}},"supports":{"color":{"background":false,"text":true},"html":false,"typography":{"fontSize":true}},"textdomain":"copyright-date-block","editorScript":"file:./index.js","render":"file:./render.php"}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"create-block/copyright-date-block","version":"0.1.0","title":"Copyright Date Block","category":"widgets","description":"Display Site\'s copyright date","example":{},"attributes":{"showStartingYear":{"type":"boolean"},"startingYear":{"type":"string"},"fallbackCurrYear":{"type":"string"}},"supports":{"color":{"background":false,"text":true},"html":false,"typography":{"fontSize":true}},"textdomain":"copyright-date-block","editorScript":"file:./index.js","render":"file:./render.php"}');
 
 /***/ })
 

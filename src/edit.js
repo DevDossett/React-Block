@@ -27,9 +27,11 @@ import { useBlockProps } from "@wordpress/block-editor";
 import { InspectorControls } from "@wordpress/block-editor";
 /* == Block Ui == */
 import { PanelBody, ToggleControl, TextControl } from "@wordpress/components";
+/* == React == */
+import { useEffect } from "react";
 
 export default function Edit({ attributes, setAttributes }) {
-	const { showStartingYear, startingYear } = attributes;
+	const { fallbackCurrYear, showStartingYear, startingYear } = attributes;
 	const currYear = new Date().getFullYear().toString();
 	// set the display date to the current year
 	let displayDate = currYear;
@@ -37,6 +39,12 @@ export default function Edit({ attributes, setAttributes }) {
 	if (showStartingYear && startingYear)
 		// set display date to starting year - current year
 		displayDate = startingYear + " - " + currYear;
+	// if the fallback year is not set, set it to the current yeat
+	useEffect(() => {
+		if (currYear != fallbackCurrYear) {
+			setAttributes({ fallbackCurrYear: currYear });
+		}
+	}, [currYear, fallbackCurrYear, setAttributes]);
 
 	return (
 		<>

@@ -13,6 +13,9 @@
     },
     "startingYear": {
       "type": "string"
+    },
+    "fallbackCurrYear": {
+      "type": "string"
     }
   },
   "supports": {
