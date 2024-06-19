@@ -3,7 +3,7 @@
  *
  * @see https://developer.wordpress.org/block-editor/reference-guides/packages/packages-i18n/
  */
-import { __ } from '@wordpress/i18n';
+import { __ } from "@wordpress/i18n";
 
 /**
  * React hook that is used to mark the block wrapper element.
@@ -11,7 +11,7 @@ import { __ } from '@wordpress/i18n';
  *
  * @see https://developer.wordpress.org/block-editor/reference-guides/packages/packages-block-editor/#useblockprops
  */
-import { useBlockProps } from '@wordpress/block-editor';
+import { useBlockProps } from "@wordpress/block-editor";
 
 /**
  * The edit function describes the structure of your block in the context of the
@@ -21,12 +21,34 @@ import { useBlockProps } from '@wordpress/block-editor';
  *
  * @return {Element} Element to render.
  */
-export default function Edit() {
+
+/* == Import wordpress files == */
+// well more.. anyway
+import { InspectorControls } from "@wordpress/block-editor";
+/* == Block Ui == */
+import { PanelBody, ToggleControl, TextControl } from "@wordpress/components";
+
+export default function Edit({ attributes, setAttributes }) {
+	const { showStartingYear, startingYear } = attributes;
 	const currYear = new Date().getFullYear().toString();
 	return (
-		<p { ...useBlockProps() }>
-			&copy;&nbsp;
-			{ currYear }
-		</p>
+		<>
+			<InspectorControls>
+				<PanelBody title={__("Setting")}>
+					<TextControl
+						label={__("Starting Year")}
+						value={startingYear || ""}
+						onChange={(value) => {
+							setAttributes({ startingYear: value });
+						}}
+					/>
+					<Toggle
+				</PanelBody>
+			</InspectorControls>
+			<p {...useBlockProps()}>
+				&copy;&nbsp;
+				{currYear}
+			</p>
+		</>
 	);
 }
