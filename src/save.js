@@ -15,10 +15,22 @@ import { useBlockProps } from '@wordpress/block-editor';
  *
  * @return {Element} Element to render.
  */
-export default function save() {
+export default function save({attributes}) {
+	// define show starting year and starting year
+	const {showStartingYear, startingYear} = attributes;
+	// define current yeat
+	const currYear = new Date().getFullYear().toString();
+	// set the display date
+	let displayDate = currYear;
+	// if we're showing the year add it it to the display date
+	if(showStartingYear && startingYear){
+		displayDate = startingYear + ' - ' + currYear;
+	}
+
 	return (
 		<p { ...useBlockProps.save() }>
-			{ 'React Block – hello from the saved content!' }
+			&copy; &nbsp;
+			{ displayDate }
 		</p>
 	);
 }
