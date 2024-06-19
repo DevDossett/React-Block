@@ -31,13 +31,20 @@ import { PanelBody, ToggleControl, TextControl } from "@wordpress/components";
 export default function Edit({ attributes, setAttributes }) {
 	const { showStartingYear, startingYear } = attributes;
 	const currYear = new Date().getFullYear().toString();
+	// set the display date to the current year
+	let displayDate = currYear;
+	// if we're showing the currrent year
+	if (showStartingYear && startingYear)
+		// set display date to starting year - current year
+		displayDate = startingYear + " - " + currYear;
+
 	return (
 		<>
 			<InspectorControls>
 				<PanelBody title={__("Setting")}>
 					<ToggleControl
 						label={__("Show Starting Year")}
-						checked = {!! showStartingYear}
+						checked={!!showStartingYear}
 						onChange={(val) => {
 							setAttributes({ showStartingYear: val });
 						}}
@@ -56,7 +63,7 @@ export default function Edit({ attributes, setAttributes }) {
 			</InspectorControls>
 			<p {...useBlockProps()}>
 				&copy;&nbsp;
-				{currYear}
+				{displayDate}
 			</p>
 		</>
 	);

@@ -59,6 +59,12 @@ function Edit({
     startingYear
   } = attributes;
   const currYear = new Date().getFullYear().toString();
+  // set the display date to the current year
+  let displayDate = currYear;
+  // if we're showing the currrent year
+  if (showStartingYear && startingYear)
+    // set display date to starting year - current year
+    displayDate = startingYear + " - " + currYear;
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.InspectorControls, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelBody, {
     title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Setting")
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.ToggleControl, {
@@ -79,7 +85,7 @@ function Edit({
     }
   }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
     ...(0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.useBlockProps)()
-  }, "\xA9\xA0", currYear));
+  }, "\xA9\xA0", displayDate));
 }
 
 /***/ }),
