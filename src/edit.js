@@ -35,14 +35,23 @@ export default function Edit({ attributes, setAttributes }) {
 		<>
 			<InspectorControls>
 				<PanelBody title={__("Setting")}>
-					<TextControl
-						label={__("Starting Year")}
-						value={startingYear || ""}
-						onChange={(value) => {
-							setAttributes({ startingYear: value });
+					<ToggleControl
+						label={__("Show Starting Year")}
+						checked = {!! showStartingYear}
+						onChange={(val) => {
+							setAttributes({ showStartingYear: val });
 						}}
 					/>
-					<Toggle
+
+					{showStartingYear && (
+						<TextControl
+							label={__("Starting Year")}
+							value={startingYear || ""}
+							onChange={(value) => {
+								setAttributes({ startingYear: value });
+							}}
+						/>
+					)}
 				</PanelBody>
 			</InspectorControls>
 			<p {...useBlockProps()}>
