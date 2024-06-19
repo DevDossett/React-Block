@@ -21,5 +21,6 @@
  */
 
 /* eslint-disable no-console */
+alert('hello world');
 console.log( 'Hello World! (from react-block-example-static block)' );
 /* eslint-enable no-console */
