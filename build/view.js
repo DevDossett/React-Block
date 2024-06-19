@@ -1,1 +1,1 @@
-alert("hello world"),console.log("Hello World! (from react-block-example-static block)");
+console.log("Hello World! (from create-block-copyright-date-block block)");

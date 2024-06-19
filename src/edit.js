@@ -32,7 +32,10 @@ import './editor.scss';
 export default function Edit() {
 	return (
 		<p { ...useBlockProps() }>
-			{ __( 'React Block – hello from the editor!', 'example-static' ) }
+			{ __(
+				'Copyright Date Block – hello from the editor!',
+				'copyright-date-block'
+			) }
 		</p>
 	);
 }
