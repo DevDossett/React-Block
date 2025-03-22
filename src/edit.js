@@ -49,7 +49,7 @@ export default function Edit({ attributes, setAttributes }) {
 	return (
 		<>
 			<InspectorControls>
-				<PanelBody title={__("Setting")}>
+				<PanelBody title={__("Settings")}>
 					<ToggleControl
 						label={__("Show Starting Year")}
 						checked={!!showStartingYear}
